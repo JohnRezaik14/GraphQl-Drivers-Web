@@ -10,4 +10,12 @@ export class CarResolver {
   car(@Args('id', { type: () => ID }) id: string) {
     return this.carService.getCar(id);
   }
+  @Mutation(() => Car)
+  async addCar(
+    @Args('name') name: string,
+    @Args('model') model: string,
+    @Args('driverId') driverId: string,
+  ) {
+    return this.carService.addCar({ name, model, driverId });
+  }
 }

@@ -4,6 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { log } from 'console';
 import { Model } from 'mongoose';
 import { Car } from 'src/models/car.model';
 
@@ -26,11 +27,14 @@ export class CarService {
       throw new NotFoundException(`Driver with id : ${id} is not valid`);
     }
   }
-  async addCar(body: { name: string; model: string }) {
+  async addCar(body: { name: string; model: string; driverId: string }) {
     try {
       const car = await this.CarModel.create(body);
+      console.log(car);
       await car.save();
+      return car;
     } catch (error) {
+      console.log(error);
       throw new ConflictException('Car an not be created');
     }
   }

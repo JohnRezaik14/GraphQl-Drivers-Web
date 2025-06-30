@@ -9,5 +9,8 @@ export class Car {
   name: string;
 
   @Field({ nullable: false })
-  model: number;
+  model: string;
+
+  @Field({ nullable: false })
+  driverId: string;
 }
